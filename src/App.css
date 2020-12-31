@@ -1,4 +1,73 @@
-.App {
-  text-align: center;
+body {
+  font-family: Circular, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #fff;
+  min-height: 100vh;
+  background-color: #000;
 }
 
+h1 {
+  line-height: 1.2em;
+  font-size: 2em;
+  margin: 0px 0px 40px 0px;
+}
+
+#root {
+  background-image: linear-gradient(transparent, #000);
+  /* background-color: #222326; */
+  background-color: #c074b2;
+}
+
+.App {
+  text-align: left;
+  max-width: 450px;
+  margin: 0px 40px;
+  padding: 50px 0px 20px 0px;
+}
+
+.circle-image {
+  clip-path: circle(18px at center);
+  width: 40px;
+  height: 40px;
+  display: block;
+}
+
+.login-button {
+  font-size: 16px;
+  line-height: 1;
+  border-radius: 500px;
+  padding: 15px 40px 16px;
+  color: #fff;
+  background-color: #1db954;
+  font-size: 14px;
+  font-weight: bold;
+  -webkit-transition-property: background-color, border-color, color,
+    -webkit-box-shadow, -webkit-filter;
+  transition-property: background-color, border-color, color, -webkit-box-shadow,
+    -webkit-filter;
+  transition-property: background-color, border-color, color, box-shadow, filter;
+  transition-property: background-color, border-color, color, box-shadow, filter,
+    -webkit-box-shadow, -webkit-filter;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  border-width: 0;
+  letter-spacing: 2px;
+  min-width: 160px;
+  text-transform: uppercase;
+  white-space: normal;
+  margin-top: 30px;
+}
+
+.login-button:hover {
+  color: #FFF;
+  background-color: #1ED760;
+  cursor: pointer;
+}
+
+.login-button:focus {
+  color: #FFF;
+  background-color: #18ac4d;
+  -webkit-box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1) inset;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1) inset;
+}
