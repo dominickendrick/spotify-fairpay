@@ -13,8 +13,13 @@ h1 {
   margin: 0px 0px 40px 0px;
 }
 
+
+table {
+  width: 50vw;
+}
+
 #root {
-  background-image: linear-gradient(transparent, #000);
+  background-image: linear-gradient(transparent 0%, #000 80%);
   /* background-color: #222326; */
   background-color: #c074b2;
 }
@@ -24,6 +29,10 @@ h1 {
   max-width: 450px;
   margin: 0px 40px;
   padding: 50px 0px 20px 0px;
+}
+
+thead > tr > th{
+  border-bottom: 1px hsla(0,0%,100%,.1) solid;
 }
 
 .circle-image {

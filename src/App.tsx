@@ -72,7 +72,7 @@ function ArtistsPage() {
 
   return (
     <div className="App">
-      <h1>Top Artists</h1>
+      <h1>Your Top Artists</h1>
       <ArtistList artists={topArtists}></ArtistList>
     </div>
   );
