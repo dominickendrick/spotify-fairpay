@@ -13,11 +13,6 @@ h1 {
   margin: 0px 0px 40px 0px;
 }
 
-
-table {
-  width: 50vw;
-}
-
 #root {
   background-image: linear-gradient(transparent 0%, #000 80%);
   /* background-color: #222326; */
@@ -26,10 +21,20 @@ table {
 
 .App {
   text-align: left;
-  max-width: 450px;
   margin: 0px 40px;
   padding: 50px 0px 20px 0px;
+
 }
+
+.homepage {
+  max-width: 450px;
+}
+
+.App .container {
+  display: inline-grid;
+  grid-template-columns: 48% 48%;
+}
+
 
 thead > tr > th{
   border-bottom: 1px hsla(0,0%,100%,.1) solid;

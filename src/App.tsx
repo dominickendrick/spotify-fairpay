@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { loginRedirect, tokenExchange } from "./spotify/api";
-import { getTopArtists, Artists, ArtistList } from "./spotify/Artists";
+import {
+  ArtistsData
+} from "./spotify/ArtistsData";
 
 import "./App.css";
 
@@ -29,6 +31,7 @@ function App() {
 function Home() {
   return (
     <section className="App">
+      <div className="homepage">
       <header className="App-header"></header>
       <h1>
         Are you your favourite artists being paid enough for their music on
@@ -45,7 +48,9 @@ function Home() {
       <button className="login-button" onClick={loginRedirect}>
         Login to Spotify
       </button>
+      </div>
     </section>
+
   );
 }
 
@@ -64,18 +69,7 @@ function Auth() {
 }
 
 function ArtistsPage() {
-  const [topArtists, setTopArtists] = useState<Artists>();
-
-  useEffect(() => {
-    getTopArtists(setTopArtists);
-  }, []);
-
-  return (
-    <div className="App">
-      <h1>Your Top Artists</h1>
-      <ArtistList artists={topArtists}></ArtistList>
-    </div>
-  );
+ return(<ArtistsData></ArtistsData>)
 }
 
 export default App;
