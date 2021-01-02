@@ -10,7 +10,7 @@ import "./App.css";
 
 function App() {
   return (
-    <Router basename="/">
+    <Router basename={__DEV__ ? "/" : "/spotify-fairpay"}>
       <div>
         <Switch>
           <Route exact path="/">
