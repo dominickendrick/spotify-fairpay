@@ -14,12 +14,17 @@ export function ArtistList(props?: ArtistProps) {
           ></img>
         </td>
         <td>{artist.name}</td>
-        <td>{artist.popularity}</td>
+        <td>{artist.popularity < 50 ? "✔︎" : ""}</td>
         <td>
-          {artist.listening_duration !== 0
-            ? `${artist.listening_duration} mins`
-            : ""}{" "}
+        {artist.popularity < 50  &&
+            <div>
+                <a className="actionLink" href="https://artist.site" >Buy CD/Vinyl</a>
+                <a className="actionLink" href="https://artist.site" >Buy Digital</a>
+                <a className="actionLink" href="https://artist.site" >Join Patreon</a>
+            </div>
+        }
         </td>
+
       </tr>
     ));
     return (
@@ -29,8 +34,8 @@ export function ArtistList(props?: ArtistProps) {
             <th>#</th>
             <th></th>
             <th>Artist</th>
-            <th>Global Popularity</th>
-            <th>Your listening time</th>
+            <th>Specialist musician</th>
+            <th>Take Action</th>
           </tr>
         </thead>
         <tbody>{listItems}</tbody>

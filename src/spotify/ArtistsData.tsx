@@ -107,7 +107,6 @@ export const getTopArtists = async (setTopArtists: any) => {
   const sessionData = getSessionData();
 
   if (sessionData) {
-    console.log("session data", sessionData);
     const accessToken = sessionData.access_token;
     const config = {
       headers: { Authorization: `Bearer ${accessToken}` },
@@ -164,16 +163,6 @@ const getListeningDuration = (
     (track: RecentlyPlayed) => {
       //look in the current tracks artists array to see if the id for this artist is in the track
       return track.track.artists.find((artistItem) => {
-        if (artistItem.id === artist.id) {
-          console.log(
-            "artist is",
-            artistItem,
-            artistItem.id,
-            artist.id,
-            artistItem.id === artist.id
-          );
-          console.log("track is", track, track.track.artists[0].name);
-        }
         return artistItem.id === artist.id;
       });
     }

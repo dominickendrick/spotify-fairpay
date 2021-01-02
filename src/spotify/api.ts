@@ -4,7 +4,7 @@ import { sha256, bufferToBase64UrlEncoded, getRandomInt, makeid } from "./utils"
 
 export const clientId = "ad2aef8b86924e66941a6c4344c4bf8a";
 export const spotifyAuthDomain = "https://accounts.spotify.com";
-const redirectUrl = "http://localhost:3000/auth-callback";
+const redirectUrl = `${window.location.protocol + "//" + window.location.host + "/"}auth-callback`;
 const scopes = "user-read-recently-played user-top-read";
 
 
@@ -47,7 +47,7 @@ export const tokenExchange = async () => {
     client_id: clientId,
     grant_type: "authorization_code",
     code: code,
-    redirect_uri: "http://localhost:3000/auth-callback",
+    redirect_uri: redirectUrl,
     code_verifier: code_verifier,
   };
 

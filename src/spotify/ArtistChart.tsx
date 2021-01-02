@@ -35,7 +35,7 @@ import { ArtistProps, Artist } from "./ArtistsData";
         type: "doughnut",
         data: {
           datasets: [chartData(popularArtistsData(props))],
-          labels: ["Popular artists", "Specialist artists"],
+          labels: ["Popular artist", "Specialist artist"],
         },
         options: {
           legend: {
@@ -82,8 +82,7 @@ export function ArtistChart(props: ArtistProps) {
             <li>Buying their music via Bandcamp/iTunes etc or on CD/Vinyl</li>
             <li>Donating via Patreon or Spotify donate system</li>
         </ol>
-        <p>You can click the buttons on the table to take action for your favourite artists!</p>
-        
+        <p>You can click the buttons on the table to take action for your favourite artists!</p>       
     </div>
   );
 }
