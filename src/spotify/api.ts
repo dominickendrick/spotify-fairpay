@@ -2,11 +2,20 @@ import axios from "axios";
 import qs from "qs";
 import { sha256, bufferToBase64UrlEncoded, getRandomInt, makeid } from "./utils"
 
+
+export const basename = () => {
+    switch (window.location.host) {
+      case "dominickendrick.github.io":
+        return "/spotify-fairpay";
+      default:
+        return ""
+    }
+  }
+
 export const clientId = "ad2aef8b86924e66941a6c4344c4bf8a";
 export const spotifyAuthDomain = "https://accounts.spotify.com";
-const redirectUrl = `${window.location.protocol + "//" + window.location.host + "/"}auth-callback`;
+const redirectUrl = `${window.location.protocol}//${window.location.host}${basename()}auth-callback`;
 const scopes = "user-read-recently-played user-top-read";
-
 
 
 export const loginRedirect = async () => {
