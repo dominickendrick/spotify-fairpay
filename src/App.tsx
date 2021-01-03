@@ -8,9 +8,18 @@ import {
 
 import "./App.css";
 
+const basename = () => {
+  switch (window.location.host) {
+    case "dominickendrick.github.io":
+      return "/spotify-fairpay";
+    default:
+      return ""
+  }
+}
+
 function App() {
   return (
-    <Router basename={__DEV__ ? "/" : "/spotify-fairpay"}>
+    <Router basename={basename()}>
       <div>
         <Switch>
           <Route exact path="/">
