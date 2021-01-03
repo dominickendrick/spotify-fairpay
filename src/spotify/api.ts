@@ -3,10 +3,10 @@ import qs from "qs";
 import { sha256, bufferToBase64UrlEncoded, getRandomInt, makeid } from "./utils"
 
 
-export const basename = () => {
+export const basename = (withTrailingSlash: boolean = false) => {
     switch (window.location.host) {
       case "dominickendrick.github.io":
-        return "/spotify-fairpay";
+        return "/spotify-fairpay" + withTrailingSlash ? "/" : "";
       default:
         return "/"
     }
@@ -14,7 +14,7 @@ export const basename = () => {
 
 export const clientId = "ad2aef8b86924e66941a6c4344c4bf8a";
 export const spotifyAuthDomain = "https://accounts.spotify.com";
-const redirectUrl = `${window.location.protocol}//${window.location.host}${basename()}auth-callback`;
+const redirectUrl = `${window.location.protocol}//${window.location.host}${basename(true)}auth-callback`;
 const scopes = "user-read-recently-played user-top-read";
 
 
