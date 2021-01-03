@@ -130,7 +130,6 @@ export const getTopArtists = async (setTopArtists: any) => {
         config
       )
       .then((res) => {
-        console.log("recently played", res.data.items);
         return res.data;
       })
       .catch(console.log);

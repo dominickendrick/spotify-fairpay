@@ -49,9 +49,10 @@ export const loginRedirect = async () => {
 export const tokenExchange = async () => {
   const params = new URL(window.location.href).searchParams;
   const code = params.get("code");
-  // const state = params.get("state");
+  const state = params.get("state");
   // TODO: check state
   const code_verifier = sessionStorage.getItem("spotify-code-verifier");
+  const request_state = sessionStorage.getItem("spotify-state");
 
   const postBody = {
     client_id: clientId,
@@ -63,13 +64,16 @@ export const tokenExchange = async () => {
 
   const tokenUrl = spotifyAuthDomain + "/api/token";
 
-  console.log("token-verification")
-  return axios
-    .post(tokenUrl, qs.stringify(postBody), {
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-    })
+  if (state === request_state){
+    return axios
+        .post(tokenUrl, qs.stringify(postBody), {
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+        })
+    } else {
+        return Promise.reject("State did not match")
+    }
 
 };
 
