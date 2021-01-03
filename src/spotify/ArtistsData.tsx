@@ -4,10 +4,14 @@ import axios from "axios";
 import { ArtistList } from "./ArtistLists";
 import { ArtistChart } from "./ArtistChart";
 
-import { getSessionData } from "./api";
+import { AuthHeader, getAuthHeader } from "./auth";
 
 export interface ArtistProps {
   artists: Artists;
+}
+
+export interface ArtistDataProps {
+  authHeader: AuthHeader
 }
 
 export interface Artists {
@@ -103,53 +107,46 @@ interface RecentlyPlayed {
   };
 }
 
-export const getTopArtists = async (setTopArtists: any) => {
-  const sessionData = getSessionData();
+export const getTopArtists = async (setTopArtists: any, authHeader: AuthHeader) => {
 
-  if (sessionData) {
-    const accessToken = sessionData.access_token;
-    const config = {
-      headers: { Authorization: `Bearer ${accessToken}` },
-    };
+  // get your top artists from the api
+  const topArtists: Artists = await axios
+    .get(
+      "https://api.spotify.com/v1/me/top/artists?time_range=long_term&limit=50",
+      authHeader
+    )
+    .then((res) => {
+      return res.data;
+    })
+    .catch(console.log);
 
-    // get your top artists from the api
-    const topArtists: Artists = await axios
-      .get(
-        "https://api.spotify.com/v1/me/top/artists?time_range=long_term&limit=50",
-        config
-      )
-      .then((res) => {
-        return res.data;
-      })
-      .catch(console.log);
+  // get your most recently played songs
+  const recentlyPlayed: RecentlyPlayedList = await axios
+    .get(
+      "https://api.spotify.com/v1/me/player/recently-played?limit=50",
+      authHeader
+    )
+    .then((res) => {
+      return res.data;
+    })
+    .catch(console.log);
 
-    // get your most recently played songs
-    const recentlyPlayed: RecentlyPlayedList = await axios
-      .get(
-        "https://api.spotify.com/v1/me/player/recently-played?limit=50",
-        config
-      )
-      .then((res) => {
-        return res.data;
-      })
-      .catch(console.log);
+  //get listening duration from top artists if possible
+  const artistsWithListeningDuration = topArtists.items.map(
+    (artist: Artist) => {
+      //this should be a deep copy
+      artist.listening_duration = getListeningDuration(
+        artist,
+        recentlyPlayed
+      );
+      return artist;
+    }
+  );
 
-    //get listening duration from top artists if possible
-    const artistsWithListeningDuration = topArtists.items.map(
-      (artist: Artist) => {
-        //this should be a deep copy
-        artist.listening_duration = getListeningDuration(
-          artist,
-          recentlyPlayed
-        );
-        return artist;
-      }
-    );
+  setTopArtists({ items: artistsWithListeningDuration });
 
-    setTopArtists({ items: artistsWithListeningDuration });
-
-    return recentlyPlayed;
-  }
+  return recentlyPlayed;
+  
 };
 
 // How much have you listened your top artists recently ?
@@ -177,10 +174,23 @@ const getListeningDuration = (
 
 export function ArtistsData() {
   const [topArtists, setTopArtists] = useState<Artists>({ items: [] });
+  const [authHeaders, setAuthHeader] = useState<AuthHeader>()
+
+  useEffect(() => {   
+    const getHeaders = async () => {
+      const headers = await getAuthHeader()
+      if (headers) {
+        setAuthHeader(headers)
+      }
+    }
+    getHeaders()
+  },[]);
 
   useEffect(() => {
-    getTopArtists(setTopArtists);
-  }, []);
+    if( authHeaders ){
+      getTopArtists(setTopArtists, authHeaders);
+    }
+  }, [authHeaders]);
 
   return (
     <div className="App">

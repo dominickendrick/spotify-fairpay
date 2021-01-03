@@ -62,7 +62,8 @@ export function ArtistChart(props: ArtistProps) {
         setChart(renderedChartRef);
       }
     }
-  },[props]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[]);
 
   useEffect(() => {
     if (chart && chart.data && chart.data.datasets) {
