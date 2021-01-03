@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import { loginRedirect, tokenExchange } from "./spotify/api";
+import { loginRedirect, tokenExchange, basename } from "./spotify/api";
 import {
   ArtistsData
 } from "./spotify/ArtistsData";

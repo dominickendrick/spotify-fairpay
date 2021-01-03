@@ -8,7 +8,7 @@ export const basename = () => {
       case "dominickendrick.github.io":
         return "/spotify-fairpay";
       default:
-        return ""
+        return "/"
     }
   }
 
