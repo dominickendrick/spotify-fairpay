@@ -6,7 +6,7 @@ import { sha256, bufferToBase64UrlEncoded, getRandomInt, makeid } from "./utils"
 export const basename = (withTrailingSlash: boolean = false) => {
     switch (window.location.host) {
       case "dominickendrick.github.io":
-        return "/spotify-fairpay" + withTrailingSlash ? "/" : "";
+        return "/spotify-fairpay" + (withTrailingSlash ? "/" : "");
       default:
         return "/"
     }
