@@ -49,7 +49,7 @@ export const loginRedirect = async () => {
 export const tokenExchange = async () => {
   const params = new URL(window.location.href).searchParams;
   const code = params.get("code");
-  const state = params.get("state");
+  // const state = params.get("state");
   // TODO: check state
   const code_verifier = sessionStorage.getItem("spotify-code-verifier");
 

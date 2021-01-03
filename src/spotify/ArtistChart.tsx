@@ -62,7 +62,7 @@ export function ArtistChart(props: ArtistProps) {
         setChart(renderedChartRef);
       }
     }
-  },[]);
+  },[props]);
 
   useEffect(() => {
     if (chart && chart.data && chart.data.datasets) {
