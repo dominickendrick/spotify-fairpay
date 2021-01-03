@@ -62,7 +62,7 @@ function Auth() {
     //once we've got the access token for spotify, we redirect the user to the top artists page
     getToken().then((res) => {
       sessionStorage.setItem("spotify-session-data", JSON.stringify(res.data));
-      window.location.href = "/top-artists";
+      window.location.href = `${basename(true)}top-artists`;
     });
   }, []);
   return <p>Successfully Logged in</p>;
