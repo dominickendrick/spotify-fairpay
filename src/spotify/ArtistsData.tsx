@@ -5,6 +5,7 @@ import { ArtistList } from "./ArtistLists";
 import { ArtistChart } from "./ArtistChart";
 
 import { AuthHeader, getAuthHeader } from "./auth";
+import { Redirect } from "react-router";
 
 export interface ArtistProps {
   artists: Artists;
@@ -116,6 +117,7 @@ export const getTopArtists = async (setTopArtists: any, authHeader: AuthHeader) 
       authHeader
     )
     .then((res) => {
+      console.log("artists data", res.data)
       return res.data;
     })
     .catch(console.log);

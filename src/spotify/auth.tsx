@@ -41,7 +41,7 @@ const tokenStillActive = () => {
 };
 
 const accessTokenConfig = async (): Promise<AuthHeader> => {
-  if (sessionData && tokenStillActive) {
+  if (sessionData && tokenStillActive()) {
     const accessToken = sessionData.access_token;
 
     return {
@@ -49,7 +49,7 @@ const accessTokenConfig = async (): Promise<AuthHeader> => {
     };
   }
 
-  if (sessionData && !tokenStillActive && sessionData.refresh_token) {
+  if (sessionData && !tokenStillActive() && sessionData.refresh_token) {
     const newSessionData = await refreshAccessToken(sessionData.refresh_token);
     const sessionDataWithExpirey = setAccessTokenExpiery(newSessionData.data);
     //store the acccess tokens in session storage
