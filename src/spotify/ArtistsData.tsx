@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 
 import { ArtistList } from "./ArtistLists";
 import { ArtistChart } from "./ArtistChart";
 
 import { AuthHeader, getAuthHeader } from "./auth";
-import { Redirect } from "react-router";
 
 export interface ArtistProps {
   artists: Artists;
