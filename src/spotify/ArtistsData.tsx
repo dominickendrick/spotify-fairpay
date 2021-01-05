@@ -135,6 +135,7 @@ interface KnowledgeGraph {
     ]
   }
 
+export const ARTIST_COUNT: number =  20;
 
 export const getArtistKnowledgeGraphData = async (query: string): Promise<KnowledgeGraph> => {
 
@@ -166,7 +167,7 @@ export const getTopArtists = async (setTopArtists: any, authHeader: AuthHeader) 
   // get your top artists from the api
   const topArtists: Artists = await axios
     .get(
-      "https://api.spotify.com/v1/me/top/artists?time_range=long_term&limit=20",
+      `https://api.spotify.com/v1/me/top/artists?time_range=long_term&limit=${ARTIST_COUNT}`,
       authHeader
     )
     .then((res) => {
@@ -176,25 +177,25 @@ export const getTopArtists = async (setTopArtists: any, authHeader: AuthHeader) 
     .catch(console.log);
 
   // get your most recently played songs
-  const recentlyPlayed: RecentlyPlayedList = await axios
-    .get(
-      "https://api.spotify.com/v1/me/player/recently-played?limit=50",
-      authHeader
-    )
-    .then((res) => {
-      return res.data;
-    })
-    .catch(console.log);
+  // const recentlyPlayed: RecentlyPlayedList = await axios
+  //   .get(
+  //     "https://api.spotify.com/v1/me/player/recently-played?limit=50",
+  //     authHeader
+  //   )
+  //   .then((res) => {
+  //     return res.data;
+  //   })
+  //   .catch(console.log);
 
   //get listening duration from top artists if possible
   const artistsWithListeningDuration = async () => {
     return topArtists.items.map(
       async (artist: Artist) => {
         //this should be a deep copy
-        artist.listening_duration = getListeningDuration(
-          artist,
-          recentlyPlayed
-        );
+        // artist.listening_duration = getListeningDuration(
+        //   artist,
+        //   recentlyPlayed
+        // );
         const graphData: KnowledgeGraph = await getArtistKnowledgeGraphData(artist.name)
         const getUrlArtistUrl = () => {
           if(graphData && graphData.itemListElement && graphData.itemListElement[0] && graphData.itemListElement[0].result && graphData.itemListElement[0].result.url){
@@ -213,30 +214,30 @@ export const getTopArtists = async (setTopArtists: any, authHeader: AuthHeader) 
       .then((artists) => {setTopArtists({ items: artists })})
   });
   
-  return recentlyPlayed;
+  //return recentlyPlayed;
   
 };
 
 // How much have you listened your top artists recently ?
-const getListeningDuration = (
-  artist: Artist,
-  recentlyPlayedList: RecentlyPlayedList
-): number | undefined => {
-  //look in recently played tracks list to see if we can find the current artist
-  const artistTrack: RecentlyPlayed | undefined = recentlyPlayedList.items.find(
-    (track: RecentlyPlayed) => {
-      //look in the current tracks artists array to see if the id for this artist is in the track
-      return track.track.artists.find((artistItem) => {
-        return artistItem.id === artist.id;
-      });
-    }
-  );
-  //oops it needs to sum the durations
-  //return the duration in minutes or 0 if no duration is present
-  return artistTrack?.track.duration_ms
-    ? Math.round(artistTrack?.track.duration_ms / 1000 / 60)
-    : 0;
-};
+// const getListeningDuration = (
+//   artist: Artist,
+//   recentlyPlayedList: RecentlyPlayedList
+// ): number | undefined => {
+//   //look in recently played tracks list to see if we can find the current artist
+//   const artistTrack: RecentlyPlayed | undefined = recentlyPlayedList.items.find(
+//     (track: RecentlyPlayed) => {
+//       //look in the current tracks artists array to see if the id for this artist is in the track
+//       return track.track.artists.find((artistItem) => {
+//         return artistItem.id === artist.id;
+//       });
+//     }
+//   );
+//   //oops it needs to sum the durations
+//   //return the duration in minutes or 0 if no duration is present
+//   return artistTrack?.track.duration_ms
+//     ? Math.round(artistTrack?.track.duration_ms / 1000 / 60)
+//     : 0;
+// };
 
 // How popular are the your top artists in terms of listen count on their most popular tracks?
 

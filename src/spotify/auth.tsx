@@ -34,7 +34,6 @@ const refreshAccessToken = async (refresh_token: string) => {
 const sessionData = getSessionData();
 
 const tokenStillActive = (): boolean => {
-  console.log(Date.now())
   if(sessionData && sessionData.expires_at && sessionData.expires_at >= Date.now()) {
     return true;
   } else {
@@ -46,12 +45,13 @@ const accessTokenConfig = async (): Promise<AuthHeader> => {
   if (sessionData && tokenStillActive()) {
     const accessToken = sessionData.access_token;
 
-    return {
+    return Promise.resolve({
       headers: { Authorization: `Bearer ${accessToken}` },
-    };
+    });
   }
 
   if (sessionData && !tokenStillActive() && sessionData.refresh_token) {
+    console.log("session not active but have refresh token", tokenStillActive() )
     const newSessionData = await refreshAccessToken(sessionData.refresh_token);
     const sessionDataWithExpirey = setAccessTokenExpiery(newSessionData.data);
     //store the acccess tokens in session storage
@@ -59,11 +59,11 @@ const accessTokenConfig = async (): Promise<AuthHeader> => {
       "spotify-session-data",
       JSON.stringify(sessionDataWithExpirey)
     );
-    return {
+    return Promise.resolve({
       headers: {
         Authorization: `Bearer ${sessionDataWithExpirey.access_token}`,
       },
-    };
+    });
   }
 
   return Promise.reject(

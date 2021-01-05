@@ -6,15 +6,16 @@ export function ArtistList(props?: ArtistProps) {
   if (props && props.artists) {
     const listItems = props.artists.items.map((artist: Artist, count) => (
       <tr key={artist.id}>
-        <td>
+          <td className="artist-position">{count + 1}</td>
+        <td className="artist-image">
           <img
             className="circle-image"
             src={artist.images[2].url}
             alt={artist.name}
           ></img>
         </td>
-        <td>{artist.name}</td>
-        <td>{artist.popularity < 50 ? "✔︎" : ""}</td>
+        <td className="artist-name">{artist.name}</td>
+        <td className="artist-popularity">{artist.popularity < 50 ? "✔︎" : ""}</td>
         <td>
         {artist.popularity < 50 && 
             <div>
@@ -29,8 +30,9 @@ export function ArtistList(props?: ArtistProps) {
       <table>
         <thead>
           <tr>
+            <th>#</th>
             <th></th>
-            <th>Artist</th>
+            <th className="artist-name-header">Artist</th>
             <th>Specialist</th>
             <th></th>
           </tr>

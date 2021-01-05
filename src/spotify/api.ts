@@ -99,7 +99,7 @@ export const tokenExchange = async () => {
 };
 
 export const setAccessTokenExpiery = (sessionData: SessionData): SessionData => {
-    sessionData.expires_at = Date.now() + sessionData.expires_in;
+    sessionData.expires_at = Date.now() + (sessionData.expires_in * 1000);
     return sessionData
 }
 

@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import Chart, { ChartDataSets } from "chart.js";
-import { ArtistProps, Artist } from "./ArtistsData";
+import { ArtistProps, Artist, ARTIST_COUNT } from "./ArtistsData";
 
 // get the number of artists from the users top artists who are popular.
   // If you have a popularity score over 50, you are popular
@@ -10,19 +10,24 @@ import { ArtistProps, Artist } from "./ArtistsData";
         return artist.popularity > 50;
       });
       // to get nonPopularArtists you minus the popular artists from total top artists
-      const nonPopularArtists = props.artists.items.length - popArtists.length;
+      const nonPopularArtists = ARTIST_COUNT - popArtists.length;
       return [popArtists.length, nonPopularArtists];
     } else {
-      return [50, 50];
+      return [0,0];
     }
   };
 
   const chartData = (popularArtistsData: Array<number>): ChartDataSets => {
     return {
-      data: popularArtistsData,
+      // convert artist data into percentages for bar chart
+      data: popularArtistsData.map((data) => {return [0, (data / ARTIST_COUNT) * 100]}),
       //fill: "none",
-      backgroundColor: ["#1db9a4", "#1db954"],
+      backgroundColor: ["#a71db9", "#1db9b9"],
       borderWidth: 0,
+      barPercentage: 0.9,
+      xAxisID: '',
+      yAxisID: ''
+      
     };
   };
 
@@ -32,13 +37,14 @@ import { ArtistProps, Artist } from "./ArtistsData";
   ): Chart | undefined => {
     if (ctx && ctx.current) {
       return new Chart(ctx.current, {
-        type: "doughnut",
+        type: "bar",
         data: {
           datasets: [chartData(popularArtistsData(props))],
-          labels: ["Popular artist", "Specialist artist"],
+          labels: ["Pop", "Specialist"],
         },
         options: {
           legend: {
+            display: false,
             labels: {
               // This more specific font property overrides the global property
               fontColor: "white",
@@ -77,7 +83,7 @@ export function ArtistChart(props: ArtistProps) {
 
   return (
     <div>
-        <h2>Over {specialistPercentage}% of your top 50 artists make specialist music.</h2>
+        <h2>Over {specialistPercentage}% of your top {ARTIST_COUNT} artists make specialist music.</h2>
         <canvas ref={ctx} />
         
         <p>Most of these musicians do not recieve enough money from Spotify</p>
