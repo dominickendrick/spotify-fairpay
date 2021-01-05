@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/spotify-fairpay/static/css/main.b6b09daf.chunk.css",
-    "main.js": "/spotify-fairpay/static/js/main.462de7fa.chunk.js",
-    "main.js.map": "/spotify-fairpay/static/js/main.462de7fa.chunk.js.map",
+    "main.css": "/spotify-fairpay/static/css/main.38131407.chunk.css",
+    "main.js": "/spotify-fairpay/static/js/main.602ce6cd.chunk.js",
+    "main.js.map": "/spotify-fairpay/static/js/main.602ce6cd.chunk.js.map",
     "runtime-main.js": "/spotify-fairpay/static/js/runtime-main.3a381f75.js",
     "runtime-main.js.map": "/spotify-fairpay/static/js/runtime-main.3a381f75.js.map",
-    "static/js/2.ae754658.chunk.js": "/spotify-fairpay/static/js/2.ae754658.chunk.js",
-    "static/js/2.ae754658.chunk.js.map": "/spotify-fairpay/static/js/2.ae754658.chunk.js.map",
+    "static/js/2.5e5627c5.chunk.js": "/spotify-fairpay/static/js/2.5e5627c5.chunk.js",
+    "static/js/2.5e5627c5.chunk.js.map": "/spotify-fairpay/static/js/2.5e5627c5.chunk.js.map",
     "static/js/3.6c54d549.chunk.js": "/spotify-fairpay/static/js/3.6c54d549.chunk.js",
     "static/js/3.6c54d549.chunk.js.map": "/spotify-fairpay/static/js/3.6c54d549.chunk.js.map",
     "index.html": "/spotify-fairpay/index.html",
-    "static/css/main.b6b09daf.chunk.css.map": "/spotify-fairpay/static/css/main.b6b09daf.chunk.css.map",
-    "static/js/2.ae754658.chunk.js.LICENSE.txt": "/spotify-fairpay/static/js/2.ae754658.chunk.js.LICENSE.txt"
+    "static/css/main.38131407.chunk.css.map": "/spotify-fairpay/static/css/main.38131407.chunk.css.map",
+    "static/js/2.5e5627c5.chunk.js.LICENSE.txt": "/spotify-fairpay/static/js/2.5e5627c5.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.3a381f75.js",
-    "static/js/2.ae754658.chunk.js",
-    "static/css/main.b6b09daf.chunk.css",
-    "static/js/main.462de7fa.chunk.js"
+    "static/js/2.5e5627c5.chunk.js",
+    "static/css/main.38131407.chunk.css",
+    "static/js/main.602ce6cd.chunk.js"
   ]
 }
