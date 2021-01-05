@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 
 import { ArtistList } from "./ArtistLists";
 import { ArtistChart } from "./ArtistChart";
@@ -20,7 +20,11 @@ export interface Artists {
 }
 
 export interface Artist {
-  external_urls: { spotify: string };
+  external_urls: { 
+    spotify: string;
+    website?: string;
+
+  };
   followers: {
     href: string;
     total: number;
@@ -108,12 +112,62 @@ interface RecentlyPlayed {
   };
 }
 
+interface KnowledgeGraph {
+  
+    itemListElement: [
+      {
+        result: {
+          name: string;
+          description: string;
+          image: {
+            contentUrl: string;
+            url: string;
+            license: string
+          };
+          detailedDescription: {
+            articleBody: string;
+            url: string;
+            license: string;
+          };
+          url: string
+        };
+        resultScore: number
+      }
+    ]
+  }
+
+
+export const getArtistKnowledgeGraphData = async (query: string): Promise<KnowledgeGraph> => {
+
+  const googleApiKey = "AIzaSyA9TnNyVDuilrsSdYIy9zxv_2B3XLjCVG4"
+  var service_url = 'https://kgsearch.googleapis.com/v1/entities:search';
+  var params = {
+    'query': query,
+    'limit': 10,
+    'indent': true,
+    'key' : googleApiKey,
+    'types': "Person"
+  }
+
+    return await axios
+    .get(
+      service_url,
+      { params }
+    )
+    .then((res) => {
+      console.log(`knowledge graph data for ${query} is: `,res.data)
+      return res.data;
+    })
+    .catch(console.log);
+  
+}
+
 export const getTopArtists = async (setTopArtists: any, authHeader: AuthHeader) => {
 
   // get your top artists from the api
   const topArtists: Artists = await axios
     .get(
-      "https://api.spotify.com/v1/me/top/artists?time_range=long_term&limit=50",
+      "https://api.spotify.com/v1/me/top/artists?time_range=long_term&limit=20",
       authHeader
     )
     .then((res) => {
@@ -134,19 +188,32 @@ export const getTopArtists = async (setTopArtists: any, authHeader: AuthHeader) 
     .catch(console.log);
 
   //get listening duration from top artists if possible
-  const artistsWithListeningDuration = topArtists.items.map(
-    (artist: Artist) => {
-      //this should be a deep copy
-      artist.listening_duration = getListeningDuration(
-        artist,
-        recentlyPlayed
-      );
-      return artist;
-    }
-  );
+  const artistsWithListeningDuration = async () => {
+    return topArtists.items.map(
+      async (artist: Artist) => {
+        //this should be a deep copy
+        artist.listening_duration = getListeningDuration(
+          artist,
+          recentlyPlayed
+        );
+        const graphData: KnowledgeGraph = await getArtistKnowledgeGraphData(artist.name)
+        const getUrlArtistUrl = () => {
+          if(graphData && graphData.itemListElement && graphData.itemListElement[0] && graphData.itemListElement[0].result && graphData.itemListElement[0].result.url){
+           const graphResult = graphData.itemListElement.find((item) => { return item.result.url !== undefined });
+           return graphResult?.result.url
+          }
+        }
+        artist.external_urls.website = getUrlArtistUrl();
+        return artist;
+      }
+    );
+  }
 
-  setTopArtists({ items: artistsWithListeningDuration });
-
+  await artistsWithListeningDuration().then(async (artistsPromise) => {
+    Promise.all(artistsPromise)
+      .then((artists) => {setTopArtists({ items: artists })})
+  });
+  
   return recentlyPlayed;
   
 };
@@ -201,7 +268,7 @@ export function ArtistsData() {
         <div className="col">
           <ArtistChart artists={topArtists}></ArtistChart>
         </div>
-        <div className="col">
+        <div className="col artists-list">
           <ArtistList artists={topArtists}></ArtistList>
         </div>
       </div>

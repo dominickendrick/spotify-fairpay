@@ -30,9 +30,26 @@ h1 {
   max-width: 450px;
 }
 
-.App .container {
-  display: inline-grid;
-  grid-template-columns: 48% 48%;
+.artists-list {
+  background-color: #000;
+  width: 100vw;
+  left: 0;
+  position: absolute;
+}
+
+table {
+  table-layout: fixed;
+  margin: 3px;
+}
+table,
+td,
+th {
+  border-collapse: collapse;
+}
+
+th,
+td {
+  text-align: center;
 }
 
 

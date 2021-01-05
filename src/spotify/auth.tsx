@@ -33,11 +33,13 @@ const refreshAccessToken = async (refresh_token: string) => {
 
 const sessionData = getSessionData();
 
-const tokenStillActive = () => {
-  return (
-    sessionData && sessionData.expires_at && sessionData.expires_at > Date.now()
-  );
-  // If there is login session data, and the current token has not expired
+const tokenStillActive = (): boolean => {
+  console.log(Date.now())
+  if(sessionData && sessionData.expires_at && sessionData.expires_at >= Date.now()) {
+    return true;
+  } else {
+    return false;
+  }
 };
 
 const accessTokenConfig = async (): Promise<AuthHeader> => {

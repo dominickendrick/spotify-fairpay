@@ -72,18 +72,16 @@ export function ArtistChart(props: ArtistProps) {
     }
   }, [props, chart]);
 
+  const [popular, specialist]  = popularArtistsData(props) 
+  const specialistPercentage = Math.floor((specialist / (popular + specialist)) * 100)
+
   return (
     <div>
-        <h2>Over {popularArtistsData(props)[1] * 2}% of your top 50 artists make specialist music.</h2>
+        <h2>Over {specialistPercentage}% of your top 50 artists make specialist music.</h2>
         <canvas ref={ctx} />
         
         <p>Most of these musicians do not recieve enough money from Spotify</p>
-        <p>You should consider:</p>
-        <ol>
-            <li>Buying their music via Bandcamp/iTunes etc or on CD/Vinyl</li>
-            <li>Donating via Patreon or Spotify donate system</li>
-        </ol>
-        <p>You can click the buttons on the table to take action for your favourite artists!</p>       
+        <p>Please help them by buying music direct or donating</p>  
     </div>
   );
 }
