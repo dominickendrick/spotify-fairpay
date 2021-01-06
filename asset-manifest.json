@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/spotify-fairpay/static/css/main.3e84898c.chunk.css",
+    "main.css": "/spotify-fairpay/static/css/main.d265a7ab.chunk.css",
     "main.js": "/spotify-fairpay/static/js/main.8c27ecf5.chunk.js",
     "main.js.map": "/spotify-fairpay/static/js/main.8c27ecf5.chunk.js.map",
     "runtime-main.js": "/spotify-fairpay/static/js/runtime-main.3a381f75.js",
@@ -10,13 +10,13 @@
     "static/js/3.6c54d549.chunk.js": "/spotify-fairpay/static/js/3.6c54d549.chunk.js",
     "static/js/3.6c54d549.chunk.js.map": "/spotify-fairpay/static/js/3.6c54d549.chunk.js.map",
     "index.html": "/spotify-fairpay/index.html",
-    "static/css/main.3e84898c.chunk.css.map": "/spotify-fairpay/static/css/main.3e84898c.chunk.css.map",
+    "static/css/main.d265a7ab.chunk.css.map": "/spotify-fairpay/static/css/main.d265a7ab.chunk.css.map",
     "static/js/2.f347de53.chunk.js.LICENSE.txt": "/spotify-fairpay/static/js/2.f347de53.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.3a381f75.js",
     "static/js/2.f347de53.chunk.js",
-    "static/css/main.3e84898c.chunk.css",
+    "static/css/main.d265a7ab.chunk.css",
     "static/js/main.8c27ecf5.chunk.js"
   ]
 }
