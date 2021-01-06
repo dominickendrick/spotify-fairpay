@@ -30,6 +30,10 @@ h1 {
 
 }
 
+.App p {
+  margin-left: -15px;
+}
+
 .homepage {
   max-width: 450px;
 }
@@ -42,7 +46,7 @@ h1 {
 
 table {
   table-layout: fixed;
-  margin: 3px;
+  margin: 0px 8px 0px 5px;
 }
 table,
 td,
