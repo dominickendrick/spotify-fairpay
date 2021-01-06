@@ -10,7 +10,7 @@ import { ArtistProps, Artist, ARTIST_COUNT } from "./ArtistsData";
         return artist.popularity > 50;
       });
       // to get nonPopularArtists you minus the popular artists from total top artists
-      const nonPopularArtists = ARTIST_COUNT - popArtists.length;
+      const nonPopularArtists = props.artists.items.length - popArtists.length;
       return [popArtists.length, nonPopularArtists];
     } else {
       return [0,0];
@@ -19,8 +19,8 @@ import { ArtistProps, Artist, ARTIST_COUNT } from "./ArtistsData";
 
   const chartData = (popularArtistsData: Array<number>): ChartDataSets => {
     return {
-      // convert artist data into percentages for bar chart
-      data: popularArtistsData.map((data) => {return [0, (data / ARTIST_COUNT) * 100]}),
+      // convert artist data into percentages
+      data: popularArtistsData.map((data) => {return [0, (data / popularArtistsData.length) * 100]}),
       //fill: "none",
       backgroundColor: ["#a71db9", "#1db9b9"],
       borderWidth: 0,

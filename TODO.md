@@ -2,6 +2,7 @@
 -[x] Scrape listening data for last day/week/month
 -[x] list top artists by listening time per song
 -[] refactor css
+-[] loading spinner
 -[] Calculate how much you should have paid the artist
 -[] handle rate limiting from spotify
 -[] link to artist payment page / social links pages

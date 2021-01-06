@@ -17,9 +17,9 @@ export function ArtistList(props?: ArtistProps) {
         <td className="artist-name">{artist.name}</td>
         <td className="artist-popularity">{artist.popularity < 50 ? "✔︎" : ""}</td>
         <td>
-        {artist.popularity < 50 && 
+        {//artist.popularity < 50 && 
             <div>
-                <a className="actionLink" href={artist.external_urls.website} >Help</a>
+                <a className="actionLink" href={`https://www.google.com/search?q=${artist.name}`} >Help</a>
             </div>
         }
         </td>
