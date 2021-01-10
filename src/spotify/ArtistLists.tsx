@@ -10,7 +10,7 @@ export function ArtistList(props?: ArtistProps) {
         <td className="artist-image">
           <img
             className="circle-image"
-            src={artist.images[2].url}
+            src={artist.images[2] ? artist.images[2].url : ""}
             alt={artist.name}
           ></img>
         </td>
