@@ -20,7 +20,7 @@ import { ArtistProps, Artist, ARTIST_COUNT } from "./ArtistsData";
   const chartData = (popularArtistsData: Array<number>): ChartDataSets => {
     return {
       // convert artist data into percentages
-      data: popularArtistsData.map((data) => {return [0, (data / popularArtistsData.length) * 100]}),
+      data: popularArtistsData.map((data) => {return [0, (data / popularArtistsData.length) * 10]}),
       //fill: "none",
       backgroundColor: ["#a71db9", "#1db9b9"],
       borderWidth: 0,
@@ -40,7 +40,7 @@ import { ArtistProps, Artist, ARTIST_COUNT } from "./ArtistsData";
         type: "bar",
         data: {
           datasets: [chartData(popularArtistsData(props))],
-          labels: ["Pop", "Specialist"],
+          labels: ["Mainstream", "Under funded"],
         },
         options: {
           legend: {
@@ -51,6 +51,16 @@ import { ArtistProps, Artist, ARTIST_COUNT } from "./ArtistsData";
             },
             position: "bottom",
           },
+          scales: {
+            yAxes: [{
+                ticks: {
+                    // Include a dollar sign in the ticks
+                    callback: function(value, index, values) {
+                        return value + ' %';
+                    }
+                }
+            }]
+        }
         },
       });
     }
@@ -83,11 +93,13 @@ export function ArtistChart(props: ArtistProps) {
 
   return (
     <div>
-        <h2>Over {specialistPercentage}% of your top {ARTIST_COUNT} artists make specialist music.</h2>
+        <h2>Over {specialistPercentage}% of your top {ARTIST_COUNT} artists are not paid enough by Spotify.</h2>
         <canvas ref={ctx} />
         
-        <p>Most of these musicians do not recieve enough money from Spotify</p>
-        <p>Please help them by buying music direct or donating</p>  
+        <p>Most of these musicians do not recieve enough money from Spotify's payment model.</p>
+        <p>As a fan of these musicians, <em>you can help them by buying music and merchendise directly</em> from them along side streaming their music.</p>
+        <p>Please ask yourself when the was the last time gave directly to my favourite under funded artist.</p>
+        <p>Check the list below to help keep the music alive.</p>
     </div>
   );
 }

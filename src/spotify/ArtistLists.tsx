@@ -4,28 +4,37 @@ import { ArtistProps } from "./ArtistsData";
 
 export function ArtistList(props?: ArtistProps) {
   if (props && props.artists) {
-    const listItems = props.artists.items.map((artist: Artist, count) => (
-      <tr key={artist.id}>
-          <td className="artist-position">{count + 1}</td>
-        <td className="artist-image">
-          <img
-            className="circle-image"
-            src={artist.images[2] ? artist.images[2].url : ""}
-            alt={artist.name}
-          ></img>
-        </td>
-        <td className="artist-name">{artist.name}</td>
-        <td className="artist-popularity">{artist.popularity < 50 ? "✔︎" : ""}</td>
-        <td>
-        {//artist.popularity < 50 && 
-            <div>
-                <a className="actionLink" href={`https://www.google.com/search?q=${artist.name}`} >Help</a>
-            </div>
-        }
-        </td>
+    const listItems = props.artists.items.map((artist: Artist, count) => {
+      const isArtistPopular = artist.popularity < 50;
 
-      </tr>
-    ));
+      return (
+        <tr key={artist.id}>
+          <td className="artist-position">{count + 1}</td>
+          <td className="artist-image">
+            <img
+              className="circle-image"
+              src={artist.images[2] ? artist.images[2].url : ""}
+              alt={artist.name}
+            ></img>
+          </td>
+          <td className="artist-name">{artist.name}</td>
+          <td className="artist-popularity">{isArtistPopular ? "✔︎" : ""}</td>
+          <td>
+            {isArtistPopular && (
+              <div>
+                <a
+                  className="actionLink"
+                  href={`https://www.google.com/search?q=${artist.name}`}
+                >
+                  Help
+                </a>
+              </div>
+            )}
+          </td>
+        </tr>
+      );
+    });
+
     return (
       <table>
         <thead>
@@ -33,7 +42,7 @@ export function ArtistList(props?: ArtistProps) {
             <th>#</th>
             <th></th>
             <th className="artist-name-header">Artist</th>
-            <th>Specialist</th>
+            <th>Under funded</th>
             <th></th>
           </tr>
         </thead>
