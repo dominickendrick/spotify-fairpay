@@ -5,7 +5,7 @@
 -[] loading spinner
 -[] Calculate how much you should have paid the artist
 -[] handle rate limiting from spotify
--[] link to artist payment page / social links pages
+-[x] link to artist payment page / social links pages
 -[] sharing
 -[x] hosting and deployment 
 -[x] handle refresh tokens

@@ -97,9 +97,9 @@ export function ArtistChart(props: ArtistProps) {
         <canvas ref={ctx} />
         
         <p>Most of these musicians do not recieve enough money from Spotify's payment model.</p>
-        <p>As a fan of these musicians, <em>you can help them by buying music and merchendise directly</em> from them along side streaming their music.</p>
-        <p>Please ask yourself when the was the last time gave directly to my favourite under funded artist.</p>
-        <p>Check the list below to help keep the music alive.</p>
+        <p>As a fan of these musicians, <em>you can help them by buying music and merchendise direct</em> alongside streaming their music.</p>
+        <p>Please ask yourself when the was the last time gave directly to your favourite under funded artist.</p>
+        <p>Check your list below to help keep the music alive.</p>
     </div>
   );
 }
