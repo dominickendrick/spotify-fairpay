@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/spotify-fairpay/static/css/main.d265a7ab.chunk.css",
-    "main.js": "/spotify-fairpay/static/js/main.31666258.chunk.js",
-    "main.js.map": "/spotify-fairpay/static/js/main.31666258.chunk.js.map",
+    "main.js": "/spotify-fairpay/static/js/main.c9d9251e.chunk.js",
+    "main.js.map": "/spotify-fairpay/static/js/main.c9d9251e.chunk.js.map",
     "runtime-main.js": "/spotify-fairpay/static/js/runtime-main.3a381f75.js",
     "runtime-main.js.map": "/spotify-fairpay/static/js/runtime-main.3a381f75.js.map",
     "static/js/2.f614edec.chunk.js": "/spotify-fairpay/static/js/2.f614edec.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.3a381f75.js",
     "static/js/2.f614edec.chunk.js",
     "static/css/main.d265a7ab.chunk.css",
-    "static/js/main.31666258.chunk.js"
+    "static/js/main.c9d9251e.chunk.js"
   ]
 }
